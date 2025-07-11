@@ -13,7 +13,7 @@ This project is based on the original [MCP Memory Server](https://github.com/mod
 ### Why This Fork Exists
 
 - **Dependency-free distribution**: The original TypeScript implementation requires Node.js and npm dependencies to be installed. This Rust implementation provides a single, self-contained binary with no external dependencies.
-- **Environment variable handling**: Addresses [the issue](https://github.com/modelcontextprotocol/servers/issues/1018) in the published npm package where the `MEMORY_FILE_PATH` environment variable was not respected due to compilation differences, causing the server to use a hardcoded path instead of the user-specified configuration.
+- **Environment variable handling**: Addresses [the issue](https://github.com/modelcontextprotocol/servers/issues/1018) in the published npm package where the `MEMORY_FILE_PATH` environment variable was not respected, causing the server to use a hardcoded path instead of the user-specified configuration.
 - **Performance**: Rust implementation with async Tokio runtime offers better performance and lower resource usage.
 
 ### Future Development
@@ -154,8 +154,3 @@ This project uses [cargo-dist](https://github.com/axodotdev/cargo-dist) to build
 ```bash
 cargo dist --release
 ```
-
-## License
-
-This project is based on the original [MCP Memory Server](https://github.com/modelcontextprotocol/servers/tree/main/src/memory) and maintains compatibility with the MCP protocol specification.
-
