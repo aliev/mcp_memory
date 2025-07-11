@@ -59,17 +59,6 @@ Run the unit tests with:
 cargo test
 ```
 
-## Continuous Integration
-
-This project uses GitHub Actions for automated testing and quality checks:
-
-- **Tests**: Automated test execution on multiple Rust versions
-- **Clippy**: Rust linting for code quality and best practices
-- **Formatting**: Code formatting verification with `rustfmt`
-- **Cross-platform builds**: Testing on Linux, macOS, and Windows
-
-All pull requests are automatically validated through these CI pipelines.
-
 ## Installation
 
 ```bash
