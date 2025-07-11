@@ -70,19 +70,13 @@ This project uses GitHub Actions for automated testing and quality checks:
 
 All pull requests are automatically validated through these CI pipelines.
 
-## Running
-
-Run the compiled binary:
+## Installation
 
 ```bash
-./target/release/memory
+brew install aliev/tap/mcp_memory
 ```
 
-The server communicates over standard input/output. Logging is disabled by default; redirect `stderr` if you want log output:
-
-```bash
-./target/release/memory 2>debug.log
-```
+Prebuilt binaries for all supported platforms are available on the [releases](https://github.com/aliev/mcp_memory/releases) page.
 
 ## Environment Variables
 
@@ -97,7 +91,7 @@ The server communicates over standard input/output. Logging is disabled by defau
 {
   "mcpServers": {
     "memory": {
-      "command": "/path/to/your/mcp-memory",
+      "command": "/path/to/your/mcp_memory",
       "env": {
         "MEMORY_FILE_PATH": "/Users/[your-username]/memory.jsonl"
       }
