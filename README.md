@@ -129,11 +129,3 @@ The `GraphService` provides the following MCP tools:
 - `get_stats` – Get statistics about the knowledge graph
 
 Clients communicate using the MCP protocol, sending JSON-RPC requests through stdin/stdout. For protocol details, see [rmcp](https://crates.io/crates/rmcp).
-
-## Releasing
-
-This project uses [cargo-dist](https://github.com/axodotdev/cargo-dist) to build and publish release artifacts. Run the following command to generate archives for all supported targets:
-
-```bash
-cargo dist --release
-```
