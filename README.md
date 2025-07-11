@@ -18,12 +18,12 @@ This project is based on the original [MCP Memory Server](https://github.com/mod
 
 ### Future Development
 
-This project includes experimental work on advanced search capabilities:
+The following advanced search features are planned, and some initial work has already been done:
 - **Embedding support**: Integration with Ollama and OpenAI for vector embeddings
 - **Vector search**: Semantic search using vector similarity
 - **Hybrid search**: Combining traditional text search with vector-based semantic search
 
-These features are currently in development and not yet included in the stable release.
+These updates will become available once they have been thoroughly tested.
 
 ## Building
 
