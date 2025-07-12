@@ -207,7 +207,11 @@ impl<GS: GraphService> GraphServiceHandler<GS> {
         }
     }
 
-    pub async fn create_entities(&self, request: CreateEntitiesRequest) -> Result<String, String> {
+    #[tool(description = "Create new entities in the knowledge graph")]
+    pub async fn create_entities(
+        &self,
+        Parameters(request): Parameters<CreateEntitiesRequest>,
+    ) -> Result<String, String> {
         match self.graph_service.create_entities(request.entities).await {
             Ok(created) => Ok(serde_json::to_string(&created).unwrap_or_else(|e| {
                 format!("Created entities but failed to serialize response: {e}")
@@ -216,9 +220,10 @@ impl<GS: GraphService> GraphServiceHandler<GS> {
         }
     }
 
+    #[tool(description = "Create new relations in the knowledge graph")]
     pub async fn create_relations(
         &self,
-        request: CreateRelationsRequest,
+        Parameters(request): Parameters<CreateRelationsRequest>,
     ) -> Result<String, String> {
         match self.graph_service.create_relations(request.relations).await {
             Ok(created) => Ok(serde_json::to_string(&created).unwrap_or_else(|e| {
@@ -241,9 +246,15 @@ impl<GS: GraphService> GraphServiceHandler<GS> {
         match result {
             Ok(graph) => match serde_json::to_string(&*graph) {
                 Ok(serialized) => Ok(CallToolResult::success(vec![Content::text(serialized)])),
-                Err(_) => Err(McpError::internal_error("Failed to serialize graph", None)),
+                Err(e) => Err(McpError::internal_error(
+                    format!("Failed to serialize graph: {e}"),
+                    None,
+                )),
             },
-            Err(_) => Err(McpError::internal_error("Search failed", None)),
+            Err(e) => Err(McpError::internal_error(
+                format!("Search failed: {e}"),
+                None,
+            )),
         }
     }
 
@@ -257,10 +268,16 @@ impl<GS: GraphService> GraphServiceHandler<GS> {
                 };
                 match serde_json::to_string(&stats) {
                     Ok(serialized) => Ok(CallToolResult::success(vec![Content::text(serialized)])),
-                    Err(_) => Err(McpError::internal_error("Failed to serialize stats", None)),
+                    Err(e) => Err(McpError::internal_error(
+                        format!("Failed to serialize stats: {e}"),
+                        None,
+                    )),
                 }
             }
-            Err(_) => Err(McpError::internal_error("Failed to get stats", None)),
+            Err(e) => Err(McpError::internal_error(
+                format!("Failed to get stats: {e}"),
+                None,
+            )),
         }
     }
 
@@ -269,9 +286,15 @@ impl<GS: GraphService> GraphServiceHandler<GS> {
         match self.graph_service.read_graph().await {
             Ok(graph) => match serde_json::to_string(&*graph) {
                 Ok(serialized) => Ok(CallToolResult::success(vec![Content::text(serialized)])),
-                Err(_) => Err(McpError::internal_error("Failed to serialize graph", None)),
+                Err(e) => Err(McpError::internal_error(
+                    format!("Failed to serialize graph: {e}"),
+                    None,
+                )),
             },
-            Err(_) => Err(McpError::internal_error("Failed to read graph", None)),
+            Err(e) => Err(McpError::internal_error(
+                format!("Failed to read graph: {e}"),
+                None,
+            )),
         }
     }
 
@@ -298,13 +321,16 @@ impl<GS: GraphService> GraphServiceHandler<GS> {
 
                 match serde_json::to_string(&formatted_results) {
                     Ok(serialized) => Ok(CallToolResult::success(vec![Content::text(serialized)])),
-                    Err(_) => Err(McpError::internal_error(
-                        "Failed to serialize observations",
+                    Err(e) => Err(McpError::internal_error(
+                        format!("Failed to serialize observations: {e}"),
                         None,
                     )),
                 }
             }
-            Err(_) => Err(McpError::internal_error("Failed to add observations", None)),
+            Err(e) => Err(McpError::internal_error(
+                format!("Failed to add observations: {e}"),
+                None,
+            )),
         }
     }
 
@@ -323,7 +349,10 @@ impl<GS: GraphService> GraphServiceHandler<GS> {
             Ok(_) => Ok(CallToolResult::success(vec![Content::text(
                 "Entities deleted successfully".to_string(),
             )])),
-            Err(_) => Err(McpError::internal_error("Failed to delete entities", None)),
+            Err(e) => Err(McpError::internal_error(
+                format!("Failed to delete entities: {e}"),
+                None,
+            )),
         }
     }
 
@@ -342,8 +371,8 @@ impl<GS: GraphService> GraphServiceHandler<GS> {
             Ok(_) => Ok(CallToolResult::success(vec![Content::text(
                 "Observations deleted successfully".to_string(),
             )])),
-            Err(_) => Err(McpError::internal_error(
-                "Failed to delete observations",
+            Err(e) => Err(McpError::internal_error(
+                format!("Failed to delete observations: {e}"),
                 None,
             )),
         }
@@ -358,7 +387,10 @@ impl<GS: GraphService> GraphServiceHandler<GS> {
             Ok(_) => Ok(CallToolResult::success(vec![Content::text(
                 "Relations deleted successfully".to_string(),
             )])),
-            Err(_) => Err(McpError::internal_error("Failed to delete relations", None)),
+            Err(e) => Err(McpError::internal_error(
+                format!("Failed to delete relations: {e}"),
+                None,
+            )),
         }
     }
 
@@ -370,9 +402,15 @@ impl<GS: GraphService> GraphServiceHandler<GS> {
         match self.graph_service.open_nodes(request.names).await {
             Ok(graph) => match serde_json::to_string(&*graph) {
                 Ok(serialized) => Ok(CallToolResult::success(vec![Content::text(serialized)])),
-                Err(_) => Err(McpError::internal_error("Failed to serialize graph", None)),
+                Err(e) => Err(McpError::internal_error(
+                    format!("Failed to serialize graph: {e}"),
+                    None,
+                )),
             },
-            Err(_) => Err(McpError::internal_error("Failed to open nodes", None)),
+            Err(e) => Err(McpError::internal_error(
+                format!("Failed to open nodes: {e}"),
+                None,
+            )),
         }
     }
 }
