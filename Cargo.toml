@@ -1,6 +1,6 @@
 [package]
 name = "mcp_memory"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 rust-version = "1.86"
 description = "MCP Memory is a lightweight Model Context Protocol (MCP) server that stores a knowledge graph on disk and provides simple text search capabilities."
